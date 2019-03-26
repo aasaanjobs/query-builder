@@ -1,4 +1,4 @@
-import { InvalidFilterFormat } from "../exceptions";
+import { InvalidFilterFormat, InvalidFilterConstraint } from "../exceptions";
 
 export class ElasticQueryBuilder {
     private operators: {[index: string]: string} = {
@@ -58,7 +58,7 @@ export class ElasticQueryBuilder {
 
     public gen(data: {[key: string]: any}, root?: any) {
         if (!data) { return []; }
-        let queries: Array<{ [index: string]: any }> = [];
+        let queries: { [index: string]: any } = { bool: {} };
         if (data.constructor !== Object) {
             throw new InvalidFilterFormat(`Expected object received ${typeof data}`);
         }
@@ -70,14 +70,13 @@ export class ElasticQueryBuilder {
             let filters = data[rootCondition];
             for (let field of Object.keys(filters)) {
                 for (let constraint of Object.keys(filters[field])) {
+                    if (!this.handlers[constraint]) {
+                        throw new InvalidFilterConstraint(`Unsupported constraint ${constraint} provided`);
+                    }
                     subQueries.push(this.handlers[constraint](field, filters[field][constraint]))
                 }
             }
-            queries.push({
-                bool: {
-                    [this.operators[rootCondition]]: subQueries
-                }
-            });
+            queries.bool[this.operators[rootCondition]] = subQueries
         }
         return queries;
     }

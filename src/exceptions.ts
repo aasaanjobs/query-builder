@@ -3,3 +3,7 @@ export class InvalidFilterFormat extends Error {
         super(m)
     }
 };
+
+export class InvalidFilterConstraint extends Error {
+    constructor(m: any) { super(m); }
+}

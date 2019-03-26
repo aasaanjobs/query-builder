@@ -1,6 +1,6 @@
 {
   "name": "@aasaanjobs/query-builder",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Common Library to build queries for filtering, sorting, etc. (For Aasaanjobs internal usage only)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
