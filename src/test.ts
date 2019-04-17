@@ -9,7 +9,14 @@ let filters = {
             nested: {
                 name: {eq: "Python"}
             }
-        }
+        },
+        'nested_bool.10': {
+            'or': {
+                'status': { eq: 'J_A'},
+                is_hr_agency: {eq: 'false'}
+            }
+        },
+        resume: { exists: false }
     },
     or: {
         "candidate.id": {eq: "22222"},
