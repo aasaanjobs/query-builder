@@ -1,4 +1,5 @@
 import { InvalidFilterFormat, InvalidFilterConstraint } from "../exceptions";
+import { DistanceFilter, isDistanceFilter } from "../interfaces";
 
 /**
  * 
@@ -24,7 +25,8 @@ export class ElasticQueryBuilder {
         nested: this.nested,
         nested_not: this.nestedNot,
         exists: this.exists,
-        missing: this.missing
+        missing: this.missing,
+        distance: this.distance
     }
 
     private negativeConstraints: Array<string> = [
@@ -117,6 +119,18 @@ export class ElasticQueryBuilder {
 
     private nestedNot(field: string, nestedFields: {[key: string]: any}) {
         return this.nested(field, nestedFields);
+    }
+
+    private distance(field: string, value: DistanceFilter) {
+        if (!isDistanceFilter(value)) {
+            throw new InvalidFilterFormat(`${field}: Invalid distance filter provided`);
+        }
+        return {
+            geo_distance: {
+                distance: value.range,
+                [field]: { lat: value.lat, lon: value.lon }
+            }
+        }
     }
 
     protected and(filters: {[key: string]: any}) {

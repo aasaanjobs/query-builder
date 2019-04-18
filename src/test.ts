@@ -16,7 +16,10 @@ let filters = {
                 is_hr_agency: {eq: 'false'}
             }
         },
-        resume: { exists: false }
+        resume: { exists: false },
+        address: {
+            distance: {lat: 1.1, lon: 1.2, range: "10km"}
+        }
     },
     or: {
         "candidate.id": {eq: "22222"},
