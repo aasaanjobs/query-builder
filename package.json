@@ -1,6 +1,6 @@
 {
   "name": "@aasaanjobs/query-builder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Common Library to build queries for filtering, sorting, etc. (For Aasaanjobs internal usage only)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -13,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/aasaanjobs/query-builder.git"
   },
-  "keywords": ["aasaanjobs", "elasticsearch", "filtering"],
+  "keywords": [
+    "aasaanjobs",
+    "elasticsearch",
+    "filtering"
+  ],
   "author": "Sohel Tarir <sohel.tarir@aasaanjobs.com>",
   "license": "ISC",
   "bugs": {
@@ -21,7 +25,13 @@
   },
   "homepage": "https://github.com/aasaanjobs/query-builder#readme",
   "devDependencies": {
+    "typedoc": "^0.14.2",
     "typescript": "^3.3.3333"
   },
-  "files": ["lib/**/*"]
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "generic-type-guard": "^3.1.0"
+  }
 }

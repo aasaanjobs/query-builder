@@ -4,7 +4,22 @@ let filters = {
     and: {
         "candidate.id": {eq: "12345"},
         "stage": {eq: "J_A"},
-        "modified": {between: ["2018-01-01", "2019-01-01"]}
+        "modified": {between: ["2018-01-01", "2019-01-01"]},
+        skills: {
+            nested: {
+                name: {eq: "Python"}
+            }
+        },
+        'nested_bool.10': {
+            'or': {
+                'status': { eq: 'J_A'},
+                is_hr_agency: {eq: 'false'}
+            }
+        },
+        resume: { exists: false },
+        address: {
+            distance: {lat: 1.1, lon: 1.2, range: "10km"}
+        }
     },
     or: {
         "candidate.id": {eq: "22222"},
