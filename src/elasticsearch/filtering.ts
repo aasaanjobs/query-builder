@@ -199,19 +199,6 @@ export class ElasticQueryBuilder {
         if (data.or) {
             Object.assign(queries.bool, this.or(data.or));
         }
-        // for (let rootCondition of Object.keys(data)) {
-        //     let subQueries: Array<any> = [];
-        //     let filters = data[rootCondition];
-        //     for (let field of Object.keys(filters)) {
-        //         for (let constraint of Object.keys(filters[field])) {
-        //             if (!this.handlers[constraint]) {
-        //                 throw new InvalidFilterConstraint(`Unsupported constraint ${constraint} provided`);
-        //             }
-        //             subQueries.push(this.handlers[constraint](field, filters[field][constraint]))
-        //         }
-        //     }
-        //     queries.bool[this.operators[rootCondition]] = subQueries
-        // }
         return queries;
     }
 
